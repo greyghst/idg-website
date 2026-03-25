@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irongate Distribution Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Noto+Serif+TC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white: #FFFFFF;
+  --off-white: #F7F5F2;
+  --light: #EFEFED;
+  --border-light: rgba(0,0,0,0.1);
+  --red: #9B1B30;
+  --red-dark: #7A1424;
+  --red-light: #C4293F;
+  --red-pale: rgba(155,27,48,0.06);
+  --ink: #1A1A1A;
+  --charcoal: #2E2E2E;
+  --mid: #555555;
+  --muted: #888888;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --serif-tc: 'Noto Serif TC', serif;
+  --sans: 'Jost', sans-serif;
+  --nav-h: 80px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body { background: var(--white); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.7; }
+body.lang-tc { font-family: var(--serif-tc); }
+body.lang-tc h1, body.lang-tc h2, body.lang-tc h3 { font-family: var(--serif-tc); font-weight: 400; letter-spacing: 0.05em; line-height: 1.4; }
+
+/* LANG TOGGLE */
+.lang-toggle { display: flex; align-items: center; background: transparent; border: 1px solid var(--border-light); border-radius: 2px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); background: transparent; border: none; padding: 7px 14px; cursor: pointer; transition: background 0.25s, color 0.25s; }
+.lang-btn.active { background: var(--red); color: var(--white); }
+.lang-btn:not(.active):hover { color: var(--ink); }
+.lang-sep { width: 1px; height: 16px; background: var(--border-light); flex-shrink: 0; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 60px; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 24px; background: var(--white); border-bottom: 2px solid var(--red); transition: box-shadow 0.3s; }
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+.nav-logo { display: flex; align-items: baseline; gap: 10px; text-decoration: none; flex-shrink: 0; cursor: pointer; }
+.nav-logo-mark { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--red); letter-spacing: 0.05em; }
+.nav-logo-sep { width: 1px; height: 18px; background: var(--border-light); display: inline-block; vertical-align: middle; }
+.nav-logo-full { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.nav-right { display: flex; align-items: center; gap: 32px; }
+.nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+.nav-links a { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; position: relative; cursor: pointer; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--red); transition: width 0.3s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after, .nav-links a.active-nav::after { width: 100%; }
+.nav-links a.active-nav { color: var(--ink); }
+.nav-cta { color: var(--white) !important; background: var(--red); padding: 10px 24px; transition: background 0.3s !important; white-space: nowrap; }
+.nav-cta:hover, .nav-cta.active-nav { background: var(--red-dark) !important; color: var(--white) !important; }
+.nav-cta::after { display: none !important; }
+
+/* PAGE CONTAINER */
+#page-wrap { position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0; overflow: hidden; }
+.page { position: absolute; inset: 0; overflow-y: auto; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
+.page.active { opacity: 1; pointer-events: all; }
+
+/* SHARED */
+.section-inner { padding: 80px 60px; max-width: 1200px; margin: 0 auto; width: 100%; }
+.section-label { font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 0.4em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+.section-label::before { content: ''; display: inline-block; width: 30px; height: 2px; background: var(--red); }
+.section-title { font-family: var(--serif); font-size: clamp(36px, 4vw, 58px); font-weight: 300; line-height: 1.1; color: var(--ink); margin-bottom: 24px; }
+.section-title em { font-style: italic; color: var(--red); }
+.section-body { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.85; max-width: 600px; }
+.red-divider { width: 60px; height: 3px; background: var(--red); margin: 40px 0; }
+
+/* MARQUEE */
+.marquee-band { background: var(--red); padding: 16px 0; overflow: hidden; }
+.marquee-track { display: flex; animation: marquee 25s linear infinite; white-space: nowrap; }
+.marquee-item { font-family: var(--sans); font-size: 10px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(255,255,255,0.7); padding: 0 50px; flex-shrink: 0; display: flex; align-items: center; gap: 50px; }
+.marquee-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; flex-shrink: 0; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── HOME ── */
+#page-home { background: var(--white); }
+.hero-accent-bar { position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--red); }
+.home-content { display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; width: 100%; }
+.hero-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+.hero-eyebrow::before { content: ''; display: inline-block; width: 40px; height: 2px; background: var(--red); }
+.hero-headline { font-family: var(--serif); font-size: clamp(52px, 6vw, 84px); font-weight: 300; line-height: 1.05; color: var(--ink); margin-bottom: 32px; }
+.hero-headline em { font-style: italic; color: var(--red); }
+.hero-sub { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.8; max-width: 520px; margin-bottom: 48px; }
+.hero-actions { display: flex; gap: 20px; align-items: center; }
+.btn-primary { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); padding: 16px 36px; text-decoration: none; transition: background 0.3s, transform 0.2s; display: inline-block; cursor: pointer; border: none; }
+.btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+.btn-ghost { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s; cursor: pointer; background: none; border: none; }
+.btn-ghost:hover { color: var(--red); }
+.btn-ghost::after { content: '→'; font-size: 14px; transition: transform 0.3s; }
+.btn-ghost:hover::after { transform: translateX(4px); }
+.hero-sidebar { display: flex; flex-direction: column; border-left: 2px solid var(--red); padding-left: 48px; }
+.hero-stat { padding: 24px 0; border-bottom: 1px solid var(--border-light); }
+.hero-stat:last-child { border-bottom: none; }
+.hero-stat-number { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--red); line-height: 1; margin-bottom: 6px; }
+.hero-stat-label { font-size: 11px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+/* ── ABOUT ── */
+#page-about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.about-body { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.9; margin-top: 32px; }
+.about-body p+p { margin-top: 20px; }
+.about-body strong { color: var(--ink); font-weight: 500; }
+.pillar { padding: 28px 0; border-bottom: 1px solid var(--border-light); display: flex; gap: 28px; align-items: flex-start; }
+.pillar:first-child { border-top: 1px solid var(--border-light); }
+.pillar-num { font-family: var(--serif); font-size: 13px; font-weight: 400; color: var(--red); letter-spacing: 0.1em; padding-top: 4px; flex-shrink: 0; }
+.pillar-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+.pillar-body { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.7; }
+
+/* ── SERVICES ── */
+#page-services { background: var(--off-white); }
+.services-header { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 60px; }
+.services-intro { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.85; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.service-card { background: var(--white); padding: 44px 36px; transition: all 0.3s; position: relative; overflow: hidden; border-top: 3px solid transparent; }
+.service-card:hover { background: var(--white); border-top-color: var(--red); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.service-icon { width: 44px; height: 44px; margin-bottom: 24px; opacity: 0.5; transition: opacity 0.3s; }
+.service-card:hover .service-icon { opacity: 1; }
+.service-icon svg { width: 100%; height: 100%; }
+.service-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 14px; line-height: 1.2; }
+.service-body { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 24px; }
+.service-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.service-features li { font-size: 12px; font-weight: 300; color: var(--mid); display: flex; align-items: center; gap: 10px; }
+.service-features li::before { content: ''; width: 20px; height: 2px; background: var(--red); flex-shrink: 0; }
+
+/* ── PORTFOLIO ── */
+#page-portfolio { background: var(--white); }
+.brand-card { background: var(--white); padding: 50px; display: grid; grid-template-columns: 280px 1fr 200px; gap: 60px; align-items: start; transition: all 0.3s; position: relative; overflow: hidden; border: 1px solid var(--border-light); margin-bottom: 2px; border-left: 4px solid var(--red); }
+.brand-card:hover { background: var(--off-white); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+.brand-role-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
+.brand-name { font-family: var(--serif); font-size: 38px; font-weight: 600; color: var(--ink); line-height: 1; margin-bottom: 8px; }
+.brand-sub { font-size: 11px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+.brand-origin { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.1em; }
+.brand-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid rgba(155,27,48,0.3); padding: 5px 12px; }
+.brand-side-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.brand-side-value { font-size: 13px; color: var(--ink); font-weight: 300; }
+.brand-visit-link { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: gap 0.3s; }
+.brand-visit-link:hover { gap: 14px; }
+
+/* ── WHY IDG ── */
+#page-why { background: var(--off-white); }
+.why-layout { display: grid; grid-template-columns: 360px 1fr; gap: 80px; align-items: start; }
+.why-left { position: sticky; top: 20px; }
+.why-quote { font-family: var(--serif); font-size: 24px; font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.5; margin-top: 36px; padding-left: 24px; border-left: 4px solid var(--red); }
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.why-item { padding: 32px; border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); background: var(--white); transition: background 0.3s; }
+.why-item:hover { background: var(--off-white); }
+.why-item:nth-child(2n) { border-right: none; }
+.why-item:nth-last-child(-n+2) { border-bottom: none; }
+.why-item-num { font-family: var(--serif); font-size: 40px; font-weight: 300; color: var(--red); opacity: 0.3; line-height: 1; margin-bottom: 12px; }
+.why-item-title { font-family: var(--serif); font-size: 20px; font-weight: 400; color: var(--ink); margin-bottom: 8px; }
+.why-item-body { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.8; }
+
+/* ── CONTACT ── */
+#page-contact { background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+.contact-body { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.85; margin-top: 28px; margin-bottom: 44px; }
+.contact-details { display: flex; flex-direction: column; gap: 22px; }
+.contact-detail { display: flex; gap: 20px; align-items: flex-start; }
+.contact-detail-label { font-size: 10px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); min-width: 80px; padding-top: 2px; }
+.contact-detail-value { font-size: 14px; font-weight: 300; color: var(--ink); }
+.contact-form { display: flex; flex-direction: column; gap: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-label { font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+.form-input, .form-textarea, .form-select { background: var(--off-white); border: 1px solid var(--border-light); border-bottom: 2px solid var(--border-light); color: var(--ink); font-family: var(--sans); font-size: 14px; font-weight: 300; padding: 13px 18px; outline: none; transition: border-color 0.3s; width: 100%; -webkit-appearance: none; }
+.form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--border-light); border-bottom-color: var(--red); background: var(--white); }
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-select option { background: var(--white); }
+.form-submit { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); border: none; padding: 16px 40px; cursor: pointer; transition: background 0.3s; align-self: flex-start; }
+.form-submit:hover { background: var(--red-dark); }
+
+/* FOOTER */
+.site-footer { background: var(--ink); margin-top: 60px; padding: 60px 0 40px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+.footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--red-light); letter-spacing: 0.08em; margin-bottom: 6px; }
+.footer-tagline { font-size: 11px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.footer-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; }
+.footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red-light); margin-bottom: 16px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; cursor: pointer; }
+.footer-links a:hover { color: var(--white); }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+.footer-bottom-links { display: flex; gap: 28px; }
+.footer-bottom-links a { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+.footer-bottom-links a:hover { color: var(--white); }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-logo" onclick="showPage('home')">
+    <span class="nav-logo-mark">IDG</span>
+    <span class="nav-logo-sep"></span>
+    <span class="nav-logo-full">Irongate Distribution Group</span>
+  </div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a onclick="showPage('about')" data-page="about" data-en="About" data-tc="關於我們">About</a></li>
+      <li><a onclick="showPage('services')" data-page="services" data-en="Services" data-tc="服務項目">Services</a></li>
+      <li><a onclick="showPage('portfolio')" data-page="portfolio" data-en="Portfolio" data-tc="品牌組合">Portfolio</a></li>
+      <li><a onclick="showPage('why')" data-page="why" data-en="Why IDG" data-tc="為何選擇IDG">Why IDG</a></li>
+      <li><a onclick="showPage('contact')" data-page="contact" class="nav-cta" data-en="Contact Us" data-tc="聯絡我們">Contact Us</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <span class="lang-sep"></span>
+      <button class="lang-btn" id="btn-tc" onclick="setLang('tc')">繁中</button>
+    </div>
+  </div>
+</nav>
+
+<div id="page-wrap">
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div style="position:relative;min-height:calc(100vh - 80px);display:flex;flex-direction:column;justify-content:center;">
+      <div class="hero-accent-bar"></div>
+      <div class="section-inner" style="padding-left:80px;">
+        <div class="home-content">
+          <div>
+            <div class="hero-eyebrow" data-en="Global Sourcing &amp; U.S. Market Development" data-tc="全球採購與美國市場開發">Global Sourcing &amp; U.S. Market Development</div>
+            <h1 class="hero-headline" data-en="Bringing the<br>World's Finest<br><em>Beverages</em> to<br>America" data-tc="將世界頂級<br><em>飲品</em>帶入<br>美國市場">Bringing the<br>World's Finest<br><em>Beverages</em> to<br>America</h1>
+            <p class="hero-sub" data-en="Irongate Distribution Group bridges world-class producers with the U.S. market — delivering premium alcoholic and non-alcoholic beverages and consumer goods with precision, integrity, and deep market expertise." data-tc="鐵門分銷集團連結世界頂級生產商與美國市場，以精準、誠信及深厚的市場專業知識，引進優質酒精與非酒精飲品及消費品。">Irongate Distribution Group bridges world-class producers with the U.S. market — delivering premium alcoholic and non-alcoholic beverages and consumer goods with precision, integrity, and deep market expertise.</p>
+            <div class="hero-actions">
+              <button class="btn-primary" onclick="showPage('services')" data-en="Our Services" data-tc="服務項目">Our Services</button>
+              <button class="btn-ghost" onclick="showPage('contact')" data-en="Start a Conversation" data-tc="立即洽談">Start a Conversation</button>
+            </div>
+          </div>
+          <div class="hero-sidebar">
+            <div class="hero-stat">
+              <div class="hero-stat-number" data-en="Global" data-tc="全球">Global</div>
+              <div class="hero-stat-label" data-en="Sourcing Network" data-tc="採購網絡">Sourcing Network</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number">3</div>
+              <div class="hero-stat-label" data-en="Core Service Areas" data-tc="核心服務領域">Core Service Areas</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number" data-en="U.S." data-tc="美國">U.S.</div>
+              <div class="hero-stat-label" data-en="Market Specialists" data-tc="市場專家">Market Specialists</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-number" data-en="End-to-End" data-tc="端對端">End-to-End</div>
+              <div class="hero-stat-label" data-en="Distribution Solutions" data-tc="分銷解決方案">Distribution Solutions</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="marquee-band">
+      <div class="marquee-track" id="marquee-track">
+        <div class="marquee-item">Premium Beverages <span class="marquee-dot"></span> Global Sourcing <span class="marquee-dot"></span> U.S. Market Development <span class="marquee-dot"></span> Logistics &amp; Distribution <span class="marquee-dot"></span> Alcoholic &amp; Non-Alcoholic <span class="marquee-dot"></span> FMCG <span class="marquee-dot"></span> Import &amp; Trade <span class="marquee-dot"></span> Brand Partnerships</div>
+        <div class="marquee-item">Premium Beverages <span class="marquee-dot"></span> Global Sourcing <span class="marquee-dot"></span> U.S. Market Development <span class="marquee-dot"></span> Logistics &amp; Distribution <span class="marquee-dot"></span> Alcoholic &amp; Non-Alcoholic <span class="marquee-dot"></span> FMCG <span class="marquee-dot"></span> Import &amp; Trade <span class="marquee-dot"></span> Brand Partnerships</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <div class="section-label" data-en="Who We Are" data-tc="關於我們">Who We Are</div>
+          <h2 class="section-title" data-en="A Bridge Between<br><em>World Producers</em><br>and U.S. Consumers" data-tc="連結<br><em>世界生產商</em><br>與美國消費者">A Bridge Between<br><em>World Producers</em><br>and U.S. Consumers</h2>
+          <div class="about-body">
+            <p data-en="Irongate Distribution Group is a premier import and distribution company founded on a singular vision: to connect the world's most compelling beverage producers and consumer goods brands with the opportunities and consumers the U.S. market offers." data-tc="鐵門分銷集團是一家頂尖的進口與分銷公司，秉持單一核心願景：將世界最具吸引力的飲品生產商及消費品品牌，與美國市場的商機和消費者緊密連結。">Irongate Distribution Group is a premier import and distribution company founded on a singular vision: to connect the world's most compelling beverage producers and consumer goods brands with the opportunities and consumers the U.S. market offers.</p>
+            <p data-en="We operate at the intersection of &lt;strong&gt;global trade expertise&lt;/strong&gt; and &lt;strong&gt;deep U.S. market knowledge&lt;/strong&gt; — navigating complex regulatory landscapes, building distributor relationships, and crafting market strategies that turn international brands into household names." data-tc="我們活躍於<strong>全球貿易專業</strong>與<strong>深厚美國市場知識</strong>的交匯點，協助品牌應對複雜法規、建立分銷商關係，並制定策略將國際品牌打造為家喻戶曉的名字。">We operate at the intersection of <strong>global trade expertise</strong> and <strong>deep U.S. market knowledge</strong> — navigating complex regulatory landscapes, building distributor relationships, and crafting market strategies that turn international brands into household names.</p>
+            <p data-en="From discovery and sourcing through compliance, logistics, and retail placement, IDG is the full-service partner that international producers trust to represent their brands with excellence on American soil." data-tc="從發掘採購到合規、物流及零售鋪貨，IDG是國際生產商信賴的全方位合作夥伴，在美國市場卓越代表您的品牌。">From discovery and sourcing through compliance, logistics, and retail placement, IDG is the full-service partner that international producers trust to represent their brands with excellence on American soil.</p>
+          </div>
+        </div>
+        <div style="padding-top:60px;">
+          <div class="pillar"><span class="pillar-num">01</span><div><div class="pillar-title" data-en="Global Perspective" data-tc="全球視野">Global Perspective</div><div class="pillar-body" data-en="We source from producing regions across Europe, the Americas, Asia, and beyond — with established relationships that grant access to exceptional products before they reach the open market." data-tc="我們從歐洲、美洲、亞洲及其他地區採購，憑藉穩固合作關係，優先取得市場頂尖產品。">We source from producing regions across Europe, the Americas, Asia, and beyond — with established relationships that grant access to exceptional products before they reach the open market.</div></div></div>
+          <div class="pillar"><span class="pillar-num">02</span><div><div class="pillar-title" data-en="U.S. Market Mastery" data-tc="美國市場深耕">U.S. Market Mastery</div><div class="pillar-body" data-en="The American beverage market is complex and competitive. Our team brings firsthand experience in regulatory compliance, three-tier system navigation, and retail and on-premise strategy." data-tc="美國飲品市場競爭激烈且結構複雜。我們擁有法規合規、三層分銷體系及零售與現場銷售策略的第一手實戰經驗。">The American beverage market is complex and competitive. Our team brings firsthand experience in regulatory compliance, three-tier system navigation, and retail and on-premise strategy.</div></div></div>
+          <div class="pillar"><span class="pillar-num">03</span><div><div class="pillar-title" data-en="End-to-End Execution" data-tc="端到端執行">End-to-End Execution</div><div class="pillar-body" data-en="We don't just open doors — we walk through them with you. From import paperwork to last-mile delivery, IDG manages every step with precision." data-tc="我們不只是為您開門——我們與您並肩同行。從進口文件到最後一哩配送，IDG精準管理每一個環節。">We don't just open doors — we walk through them with you. From import paperwork to last-mile delivery, IDG manages every step with precision.</div></div></div>
+          <div class="pillar"><span class="pillar-num">04</span><div><div class="pillar-title" data-en="Brand Integrity" data-tc="品牌誠信">Brand Integrity</div><div class="pillar-body" data-en="Every brand we represent is carefully vetted and genuinely supported. We are invested partners in your success, not just a logistics conduit." data-tc="我們代理的每一個品牌都經過嚴格審核並獲得真誠支持。我們是您成功的真正夥伴，而非單純的物流中介。">Every brand we represent is carefully vetted and genuinely supported. We are invested partners in your success, not just a logistics conduit.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="page" id="page-services">
+    <div class="section-inner">
+      <div class="services-header">
+        <div>
+          <div class="section-label" data-en="What We Do" data-tc="我們的業務">What We Do</div>
+          <h2 class="section-title" data-en="Our Core<br><em>Services</em>" data-tc="核心<br><em>服務項目</em>">Our Core<br><em>Services</em></h2>
+        </div>
+        <p class="services-intro" data-en="IDG offers a comprehensive suite of services designed to take international brands from point of origin to the American consumer's hands — seamlessly and strategically." data-tc="IDG提供全面的服務套組，旨在將國際品牌從原產地無縫且有策略地帶入美國消費者手中。">IDG offers a comprehensive suite of services designed to take international brands from point of origin to the American consumer's hands — seamlessly and strategically.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#9B1B30" stroke-width="1.5"/><path d="M4 24h40M24 4c-5 8-5 28 0 40M24 4c5 8 5 28 0 40" stroke="#9B1B30" stroke-width="1.5"/><path d="M8 14h32M8 34h32" stroke="#9B1B30" stroke-width="1.5"/></svg></div>
+          <h3 class="service-title" data-en="Global Sourcing<br>&amp; Trade" data-tc="全球採購<br>與貿易">Global Sourcing<br>&amp; Trade</h3>
+          <p class="service-body" data-en="We identify, evaluate, and secure partnerships with world-class producers across every major category — bringing exclusive and emerging brands to your portfolio." data-tc="我們識別、評估並與各主要品類的世界頂級生產商建立合作關係，為您的品牌組合引入獨家及新興品牌。">We identify, evaluate, and secure partnerships with world-class producers across every major category — bringing exclusive and emerging brands to your portfolio.</p>
+          <ul class="service-features">
+            <li data-en="International producer discovery &amp; vetting" data-tc="國際生產商發掘與審核">International producer discovery &amp; vetting</li>
+            <li data-en="Import compliance &amp; documentation" data-tc="進口合規與文件處理">Import compliance &amp; documentation</li>
+            <li data-en="Exclusive brand representation agreements" data-tc="品牌獨家代理協議">Exclusive brand representation agreements</li>
+            <li data-en="Category strategy &amp; portfolio curation" data-tc="品類策略與組合規劃">Category strategy &amp; portfolio curation</li>
+            <li data-en="Trade finance &amp; commercial negotiation" data-tc="貿易融資與商業談判">Trade finance &amp; commercial negotiation</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="28" rx="1" stroke="#9B1B30" stroke-width="1.5"/><path d="M4 18h40M16 18v20M32 18v20" stroke="#9B1B30" stroke-width="1.5"/><circle cx="24" cy="10" r="4" stroke="#9B1B30" stroke-width="1.5"/></svg></div>
+          <h3 class="service-title" data-en="U.S. Market<br>Development" data-tc="美國市場<br>開發">U.S. Market<br>Development</h3>
+          <p class="service-body" data-en="Entering the U.S. market requires more than great product. We build the strategy, relationships, and infrastructure to make your brand succeed long-term." data-tc="進入美國市場不僅需要優質產品。我們為您建立策略、關係網絡及基礎設施，確保品牌長期成功。">Entering the U.S. market requires more than great product. We build the strategy, relationships, and infrastructure to make your brand succeed long-term.</p>
+          <ul class="service-features">
+            <li data-en="Go-to-market strategy &amp; positioning" data-tc="市場進入策略與定位">Go-to-market strategy &amp; positioning</li>
+            <li data-en="Three-tier system navigation" data-tc="三層分銷體系導航">Three-tier system navigation</li>
+            <li data-en="Distributor identification &amp; negotiation" data-tc="分銷商識別與談判">Distributor identification &amp; negotiation</li>
+            <li data-en="Retail &amp; on-premise channel development" data-tc="零售與現場渠道開發">Retail &amp; on-premise channel development</li>
+            <li data-en="Brand activation &amp; marketing support" data-tc="品牌活化與市場推廣支持">Brand activation &amp; marketing support</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><svg viewBox="0 0 48 48" fill="none"><path d="M4 36l10-20 10 10 8-14 12 24H4z" stroke="#9B1B30" stroke-width="1.5" stroke-linejoin="round"/><circle cx="38" cy="14" r="4" stroke="#9B1B30" stroke-width="1.5"/><path d="M4 40h40" stroke="#9B1B30" stroke-width="1.5"/></svg></div>
+          <h3 class="service-title" data-en="Logistics &amp;<br>Distribution" data-tc="物流<br>與分銷">Logistics &amp;<br>Distribution</h3>
+          <p class="service-body" data-en="Our operational infrastructure ensures your product moves from origin to destination reliably, compliantly, and efficiently — at every scale." data-tc="我們的運營基礎設施確保您的產品從原產地到目的地可靠、合規且高效地流通，適用於各種規模。">Our operational infrastructure ensures your product moves from origin to destination reliably, compliantly, and efficiently — at every scale.</p>
+          <ul class="service-features">
+            <li data-en="International freight &amp; customs clearance" data-tc="國際貨運與清關">International freight &amp; customs clearance</li>
+            <li data-en="Licensed warehousing &amp; inventory management" data-tc="持牌倉儲與庫存管理">Licensed warehousing &amp; inventory management</li>
+            <li data-en="Last-mile delivery coordination" data-tc="最後一哩配送協調">Last-mile delivery coordination</li>
+            <li data-en="Cold-chain &amp; temperature-sensitive logistics" data-tc="冷鏈及溫控物流">Cold-chain &amp; temperature-sensitive logistics</li>
+            <li data-en="Order fulfillment &amp; retailer compliance" data-tc="訂單履行與零售商合規">Order fulfillment &amp; retailer compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div class="page" id="page-portfolio">
+    <div class="section-inner">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:60px;">
+        <div>
+          <div class="section-label" data-en="Our Portfolio" data-tc="我們的品牌組合">Our Portfolio</div>
+          <h2 class="section-title" data-en="Brands We<br><em>Represent</em>" data-tc="我們代理的<br><em>品牌</em>">Brands We<br><em>Represent</em></h2>
+        </div>
+        <p class="section-body" data-en="We partner with international and U.S. brands that share a common denominator: compelling products, uncompromising quality, and an artisan spirit. Our portfolio is deliberately diverse — united not by category, but by the conviction that discerning American consumers deserve access to the world's best." data-tc="我們與國際及美國品牌合作，共同點是：令人信服的產品、毫不妥協的品質，以及工匠精神。我們的品牌組合刻意多元化——不以品類為紐帶，而是共同相信美國消費者值得擁有世界最好的產品。">We partner with international and U.S. brands that share a common denominator: compelling products, uncompromising quality, and an artisan spirit. Our portfolio is deliberately diverse — united not by category, but by the conviction that discerning American consumers deserve access to the world's best.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+
+        <!-- OMAR -->
+        <div class="brand-card">
+          <div>
+            <div class="brand-role-tag" data-en="Exclusive U.S. Distributor" data-tc="美國獨家分銷商">Exclusive U.S. Distributor</div>
+            <div class="brand-name">OMAR</div>
+            <div class="brand-sub" data-en="Single Malt Whisky" data-tc="單一麥芽威士忌">Single Malt Whisky</div>
+            <div class="brand-origin" data-en="Taiwan · Nantou Distillery" data-tc="台灣·南投酒廠">Taiwan · Nantou Distillery</div>
+                        <div style="display:flex;gap:10px;margin-top:28px;align-items:flex-end;">
+              <img src="images/omar-bottle-1.png"
+                   alt="OMAR Sherry Cask"
+                   style="width:70px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));transition:transform 0.35s;"
+                   onmouseover="this.style.transform='translateY(-8px) scale(1.06)'"
+                   onmouseout="this.style.transform='translateY(0) scale(1)'">
+              <img src="images/omar-bottle-2.png"
+                   alt="OMAR Bourbon Cask"
+                   style="width:70px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));transition:transform 0.35s;"
+                   onmouseover="this.style.transform='translateY(-8px) scale(1.06)'"
+                   onmouseout="this.style.transform='translateY(0) scale(1)'">
+              <img src="images/omar-bottle-3.png"
+                   alt="OMAR Cask Strength"
+                   style="width:70px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.3));transition:transform 0.35s;"
+                   onmouseover="this.style.transform='translateY(-8px) scale(1.06)'"
+                   onmouseout="this.style.transform='translateY(0) scale(1)'">
+            </div>
+          </div>
+          <div>
+            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water." data-tc="OMAR是台灣最受讚譽的單一麥芽威士忌，產自位於台灣中部山區的南投酒廠。由台灣菸酒公司精心釀造，OMAR在蓋爾語中意為「琥珀」，以其熱帶果香特色著稱，源自島嶼獨特的亞熱帶氣候與清冽山泉水。">OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water.</p>
+            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage." data-tc="OMAR採用非冷凝過濾，不添加焦糖色素，每一瓶都呈現自然風土。在ISC、SFWSC、IWSC、WWA及CMB等國際賽事屢獲殊榮，包括最高大獎及金牌，OMAR已在世界威士忌舞台確立地位。">Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
+              <span class="brand-tag" data-en="Core Range" data-tc="核心系列">Core Range</span>
+              <span class="brand-tag" data-en="Sherry &amp; Bourbon Cask" data-tc="雪莉桶與波本桶">Sherry &amp; Bourbon Cask</span>
+              <span class="brand-tag" data-en="Cask Strength" data-tc="原桶強度">Cask Strength</span>
+              <span class="brand-tag" data-en="Special Editions" data-tc="特別版">Special Editions</span>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--border-light);padding-left:30px;">
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Category" data-tc="品類">Category</div><div class="brand-side-value" data-en="Single Malt Whisky" data-tc="單一麥芽威士忌">Single Malt Whisky</div></div>
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Origin" data-tc="原產地">Origin</div><div class="brand-side-value" data-en="Taiwan" data-tc="台灣">Taiwan</div></div>
+            <div style="margin-bottom:30px;"><div class="brand-side-label" data-en="IDG Role" data-tc="IDG角色">IDG Role</div><div class="brand-side-value" data-en="Exclusive U.S. Distributor" data-tc="美國獨家分銷商">Exclusive U.S. Distributor</div></div>
+            <a href="https://omarwhisky.com.tw/en/" target="_blank" class="brand-visit-link" data-en="Visit Brand →" data-tc="瀏覽品牌 →">Visit Brand →</a>
+          </div>
+        </div>
+
+        <!-- GOODIE FRUITIE -->
+        <div class="brand-card">
+          <div>
+            <div class="brand-role-tag" data-en="Exclusive U.S. Distributor" data-tc="美國獨家分銷商">Exclusive U.S. Distributor</div>
+            <div class="brand-name" style="font-size:30px;">Goodie<br>Fruitie</div>
+            <div class="brand-sub" data-en="好結果 · Artisan Fruit Products" data-tc="好結果·精選果品">好結果 · Artisan Fruit Products</div>
+            <div class="brand-origin" data-en="Taiwan · Kaohsiung" data-tc="台灣·高雄">Taiwan · Kaohsiung</div>
+            <!-- Goodie Fruitie product image -->
+            <div style="margin-top:24px;">
+              <img src="images/goodie-fruitie-product.jpg"
+                   alt="Goodie Fruitie premium freeze-dried fruit products"
+                   style="width:100%;max-width:240px;border-radius:2px;box-shadow:0 4px 20px rgba(0,0,0,0.1);transition:transform 0.3s;"
+                   onmouseover="this.style.transform='scale(1.03)'"
+                   onmouseout="this.style.transform='scale(1)'">
+            </div>
+          </div>
+          <div>
+            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft." data-tc="好結果（Goodie Fruitie）是一個台灣手工品牌，以一個獨特理念為核心：以最純粹美好的形式，展現台灣非凡的水果文化。由一鳴農園生技農園創立，品牌將台灣新鮮採收的水果，製成無人工添加劑的優質乾果及特色產品——只有水果、用心與工藝。">Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft.</p>
+            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers." data-tc="其中最具特色的是神秘果產品——這種源自西非、在台灣長期栽培的稀有水果，能暫時將酸味轉化為甜味。以精美禮盒呈現，好結果佔據了優質「食物即體驗」的市場定位，深受美國特色零售及注重健康的消費者青睞。">A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
+              <span class="brand-tag" data-en="Miracle Berry" data-tc="神秘果">Miracle Berry</span>
+              <span class="brand-tag" data-en="Premium Dried Fruit" data-tc="優質乾果">Premium Dried Fruit</span>
+              <span class="brand-tag" data-en="Gift Collections" data-tc="禮盒系列">Gift Collections</span>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--border-light);padding-left:30px;">
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Category" data-tc="品類">Category</div><div class="brand-side-value" data-en="Specialty Food" data-tc="特色食品">Specialty Food</div></div>
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Origin" data-tc="原產地">Origin</div><div class="brand-side-value" data-en="Taiwan" data-tc="台灣">Taiwan</div></div>
+            <div style="margin-bottom:30px;"><div class="brand-side-label" data-en="IDG Role" data-tc="IDG角色">IDG Role</div><div class="brand-side-value" data-en="Exclusive U.S. Distributor" data-tc="美國獨家分銷商">Exclusive U.S. Distributor</div></div>
+            <a href="https://goodiefruitietw.com/" target="_blank" class="brand-visit-link" data-en="Visit Brand →" data-tc="瀏覽品牌 →">Visit Brand →</a>
+          </div>
+        </div>
+
+        <!-- REDBLOOM -->
+        <div class="brand-card">
+          <div>
+            <div class="brand-role-tag" data-en="Chicago &amp; Illinois Distribution Partner" data-tc="芝加哥及伊利諾伊州分銷夥伴">Chicago &amp; Illinois Distribution Partner</div>
+            <div class="brand-name">Redbloom</div>
+            <div class="brand-sub" data-en="Gut Healthy Chili Crisp" data-tc="腸胃友善辣椒脆">Gut Healthy Chili Crisp</div>
+            <div class="brand-origin" data-en="United States" data-tc="美國">United States</div>
+            <div style="margin-top:24px;">
+              <img src="images/Redbloom.jpg"
+                   alt="Redbloom gut healthy chili crisp"
+                   style="width:100%;max-width:240px;border-radius:2px;box-shadow:0 4px 20px rgba(0,0,0,0.15);transition:transform 0.3s;"
+                   onmouseover="this.style.transform='scale(1.03)'"
+                   onmouseout="this.style.transform='scale(1)'">
+            </div>
+          </div>
+          <div>
+            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief." data-tc="Redbloom是首款專為腸胃健康設計的辣椒脆，臨床配方讓愛辣者盡享濃郁風味而無消化不適。有機辣椒以酪梨油微膠囊化，在傳遞真實辣味的同時保護腸道內壁，使Redbloom成為首款以臨床劑量和辣椒素療法緩解腸易激綜合症的辣椒脆。">Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief.</p>
+            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan." data-tc="曾獲Men's Health及Eater報導，並獲史丹佛醫學院及芝加哥大學腸胃科醫生背書，Redbloom符合HSA/FSA資格——這是食品中罕見的殊榮。提供三種辣度（鮮味、香氣、多巴胺），無種籽油、低FODMAP、無麩質且純素。">As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
+              <span class="brand-tag" data-en="HSA / FSA Eligible" data-tc="HSA/FSA適用">HSA / FSA Eligible</span>
+              <span class="brand-tag" data-en="Clinically Formulated" data-tc="臨床配方">Clinically Formulated</span>
+              <span class="brand-tag" data-en="Doctor Recommended" data-tc="醫生推薦">Doctor Recommended</span>
+              <span class="brand-tag" data-en="Vegan · Gluten Free" data-tc="純素·無麩質">Vegan · Gluten Free</span>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--border-light);padding-left:30px;">
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Category" data-tc="品類">Category</div><div class="brand-side-value" data-en="Specialty Food / Wellness" data-tc="特色食品／健康">Specialty Food / Wellness</div></div>
+            <div style="margin-bottom:22px;"><div class="brand-side-label" data-en="Origin" data-tc="原產地">Origin</div><div class="brand-side-value" data-en="United States" data-tc="美國">United States</div></div>
+            <div style="margin-bottom:30px;"><div class="brand-side-label" data-en="IDG Role" data-tc="IDG角色">IDG Role</div><div class="brand-side-value" data-en="Chicago &amp; IL Distribution" data-tc="芝加哥及伊利諾伊州分銷">Chicago &amp; IL Distribution</div></div>
+            <a href="https://redbloom.co/" target="_blank" class="brand-visit-link" data-en="Visit Brand →" data-tc="瀏覽品牌 →">Visit Brand →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="red-divider"></div>
+      <p style="font-family:var(--serif);font-size:17px;color:var(--mid);font-style:italic;">
+        <span data-en="Have a brand that belongs in this company?" data-tc="您的品牌是否應在此列？">Have a brand that belongs in this company?</span>
+        <a onclick="showPage('contact')" style="color:var(--red);text-decoration:none;cursor:pointer;font-weight:400;" data-en=" Let's talk →" data-tc=" 立即洽談 →"> Let's talk →</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- WHY IDG -->
+  <div class="page" id="page-why">
+    <div class="section-inner">
+      <div class="why-layout">
+        <div class="why-left">
+          <div class="section-label" data-en="The IDG Difference" data-tc="IDG的與眾不同">The IDG Difference</div>
+          <h2 class="section-title" data-en="Why Partner<br>With <em>IDG</em>" data-tc="為何選擇<br>與<em>IDG</em>合作">Why Partner<br>With <em>IDG</em></h2>
+          <blockquote class="why-quote" data-en="We don't just move product — we build market presence." data-tc="「我們不只是移動產品——我們建立市場地位。」">We don't just move product — we build market presence.</blockquote>
+        </div>
+        <div class="why-grid">
+          <div class="why-item"><div class="why-item-num">01</div><div class="why-item-title" data-en="Selective Partnerships" data-tc="精選合作夥伴">Selective Partnerships</div><div class="why-item-body" data-en="We work with a curated roster of brands, giving each one the attention, strategy, and advocacy they deserve. You are never just a line item in our portfolio." data-tc="我們與精選品牌合作，為每個品牌提供應有的關注、策略與支持。您在我們的組合中絕非只是一個名字。">We work with a curated roster of brands, giving each one the attention, strategy, and advocacy they deserve. You are never just a line item in our portfolio.</div></div>
+          <div class="why-item"><div class="why-item-num">02</div><div class="why-item-title" data-en="Deep Regulatory Expertise" data-tc="深厚的法規專業">Deep Regulatory Expertise</div><div class="why-item-body" data-en="Importing alcohol and consumer goods into the U.S. is complex. Our team navigates TTB, FDA, CBP, and state-level compliance with precision so you don't have to." data-tc="將酒精及消費品進口至美國程序複雜。我們精準應對TTB、FDA、CBP及各州合規要求，讓您無需為此煩惱。">Importing alcohol and consumer goods into the U.S. is complex. Our team navigates TTB, FDA, CBP, and state-level compliance with precision so you don't have to.</div></div>
+          <div class="why-item"><div class="why-item-num">03</div><div class="why-item-title" data-en="Market Intelligence" data-tc="市場情報">Market Intelligence</div><div class="why-item-body" data-en="We continuously track consumer trends, competitive dynamics, and channel shifts — ensuring your brand strategy is always grounded in current U.S. market realities." data-tc="我們持續追蹤消費者趨勢、競爭動態及渠道變化，確保您的品牌策略始終立足於美國市場最新現實。">We continuously track consumer trends, competitive dynamics, and channel shifts — ensuring your brand strategy is always grounded in current U.S. market realities.</div></div>
+          <div class="why-item"><div class="why-item-num">04</div><div class="why-item-title" data-en="Integrated Operations" data-tc="整合化運營">Integrated Operations</div><div class="why-item-body" data-en="From sourcing to shelf, our vertically integrated approach eliminates hand-offs and communication gaps — resulting in faster timelines and higher brand consistency." data-tc="從採購到上架，我們的垂直整合方式消除交接環節與溝通落差，帶來更快的上市時間與更高品牌一致性。">From sourcing to shelf, our vertically integrated approach eliminates hand-offs and communication gaps — resulting in faster timelines and higher brand consistency.</div></div>
+          <div class="why-item"><div class="why-item-num">05</div><div class="why-item-title" data-en="Long-Term Orientation" data-tc="長遠發展視野">Long-Term Orientation</div><div class="why-item-body" data-en="We measure success in brand equity and sustained growth, not just first-year volume. Our partnerships are built for the long term." data-tc="我們以品牌資產和持續增長衡量成功，而非僅看重第一年的銷售量。我們的合作關係著眼於長遠。">We measure success in brand equity and sustained growth, not just first-year volume. Our partnerships are built for the long term.</div></div>
+          <div class="why-item"><div class="why-item-num">06</div><div class="why-item-title" data-en="Founder-Led Accountability" data-tc="創辦人主導問責">Founder-Led Accountability</div><div class="why-item-body" data-en="As a founder-managed firm, you work directly with decision-makers. No account managers, no bureaucracy — just committed partners with skin in the game." data-tc="作為創辦人管理的公司，您直接與決策者合作。無需客戶經理、無繁瑣程序——只有真正投入的合作夥伴。">As a founder-managed firm, you work directly with decision-makers. No account managers, no bureaucracy — just committed partners with skin in the game.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="page-contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div>
+          <div class="section-label" data-en="Get In Touch" data-tc="與我們聯絡">Get In Touch</div>
+          <h2 class="section-title" data-en="Let's Build<br>Something<br><em>Together</em>" data-tc="攜手<br>共創<br><em>未來</em>">Let's Build<br>Something<br><em>Together</em></h2>
+          <p class="contact-body" data-en="Whether you're a producer looking to enter the U.S. market, a retailer seeking exclusive international brands, or an industry professional exploring a partnership — we'd love to hear from you." data-tc="無論您是希望進入美國市場的生產商、尋求獨家國際品牌的零售商，還是探索合作機會的行業專業人士——我們期待聆聽您的聲音。">Whether you're a producer looking to enter the U.S. market, a retailer seeking exclusive international brands, or an industry professional exploring a partnership — we'd love to hear from you.</p>
+          <div class="contact-details">
+            <div class="contact-detail"><span class="contact-detail-label" data-en="Location" data-tc="地點">Location</span><span class="contact-detail-value" data-en="United States" data-tc="美國">United States</span></div>
+            <div class="contact-detail"><span class="contact-detail-label" data-en="Focus" data-tc="專注領域">Focus</span><span class="contact-detail-value" data-en="Premium Beverages &amp; FMCG Import" data-tc="優質飲品與快消品進口">Premium Beverages &amp; FMCG Import</span></div>
+            <div class="contact-detail"><span class="contact-detail-label" data-en="Inquiries" data-tc="查詢">Inquiries</span><span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6bfb8b0b996bfa4b9b8b1b7a2b3bfb2b1f8b5b9bb">[email&#160;protected]</a></span></div>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label" data-en="First Name" data-tc="名字">First Name</label><input type="text" class="form-input" data-ph-en="John" data-ph-tc="名" placeholder="John"></div>
+              <div class="form-group"><label class="form-label" data-en="Last Name" data-tc="姓氏">Last Name</label><input type="text" class="form-input" data-ph-en="Smith" data-ph-tc="例：陳" placeholder="Smith"></div>
+            </div>
+            <div class="form-group"><label class="form-label" data-en="Company" data-tc="公司名稱">Company</label><input type="text" class="form-input" data-ph-en="Your company name" data-ph-tc="您的公司名稱" placeholder="Your company name"></div>
+            <div class="form-group"><label class="form-label" data-en="Email" data-tc="電子郵件">Email</label><input type="email" class="form-input" placeholder="john@company.com"></div>
+            <div class="form-group">
+              <label class="form-label" data-en="I Am A..." data-tc="我的身份是...">I Am A...</label>
+              <select class="form-select">
+                <option data-en="Select your role" data-tc="請選擇身份">Select your role</option>
+                <option data-en="International Producer / Brand Owner" data-tc="國際生產商／品牌擁有人">International Producer / Brand Owner</option>
+                <option data-en="U.S. Retailer / Buyer" data-tc="美國零售商／採購商">U.S. Retailer / Buyer</option>
+                <option data-en="Distributor" data-tc="分銷商">Distributor</option>
+                <option data-en="Investor / Business Partner" data-tc="投資者／商業夥伴">Investor / Business Partner</option>
+                <option data-en="Other" data-tc="其他">Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label" data-en="Message" data-tc="留言">Message</label><textarea class="form-textarea" data-ph-en="Tell us about your brand, goals, or inquiry..." data-ph-tc="請告訴我們您的品牌、目標或查詢內容……" placeholder="Tell us about your brand, goals, or inquiry..."></textarea></div>
+            <button type="submit" class="form-submit" data-en="Send Message →" data-tc="發送訊息 →">Send Message →</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-top">
+            <div>
+              <div class="footer-logo">IDG</div>
+              <div class="footer-tagline">Irongate Distribution Group</div>
+              <p class="footer-desc" data-en="Premium beverage and consumer goods import &amp; distribution. Connecting the world's finest producers with the U.S. market." data-tc="優質飲品及消費品進口與分銷。連結世界頂級生產商與美國市場。">Premium beverage and consumer goods import &amp; distribution. Connecting the world's finest producers with the U.S. market.</p>
+            </div>
+            <div>
+              <div class="footer-col-title" data-en="Navigation" data-tc="導航">Navigation</div>
+              <ul class="footer-links">
+                <li><a onclick="showPage('about')" data-en="About IDG" data-tc="關於IDG">About IDG</a></li>
+                <li><a onclick="showPage('services')" data-en="Our Services" data-tc="服務項目">Our Services</a></li>
+                <li><a onclick="showPage('portfolio')" data-en="Brand Portfolio" data-tc="品牌組合">Brand Portfolio</a></li>
+                <li><a onclick="showPage('why')" data-en="Why IDG" data-tc="為何選擇IDG">Why IDG</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-col-title" data-en="Services" data-tc="服務">Services</div>
+              <ul class="footer-links">
+                <li><a onclick="showPage('services')" data-en="Global Sourcing &amp; Trade" data-tc="全球採購與貿易">Global Sourcing &amp; Trade</a></li>
+                <li><a onclick="showPage('services')" data-en="U.S. Market Development" data-tc="美國市場開發">U.S. Market Development</a></li>
+                <li><a onclick="showPage('services')" data-en="Logistics &amp; Distribution" data-tc="物流與分銷">Logistics &amp; Distribution</a></li>
+              </ul>
+            </div>
+            <div>
+              <div class="footer-col-title" data-en="Portfolio" data-tc="品牌組合">Portfolio</div>
+              <ul class="footer-links">
+                <li><a onclick="showPage('portfolio')" data-en="OMAR Whisky" data-tc="OMAR威士忌">OMAR Whisky</a></li>
+                <li><a onclick="showPage('portfolio')" data-en="Goodie Fruitie" data-tc="好結果">Goodie Fruitie</a></li>
+                <li><a onclick="showPage('portfolio')" data-en="Redbloom" data-tc="Redbloom">Redbloom</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <span class="footer-copy" data-en="© 2026 Irongate Distribution Group, LLC. All rights reserved." data-tc="© 2026 鐵門分銷集團有限責任公司。版權所有。">© 2026 Irongate Distribution Group, LLC. All rights reserved.</span>
+            <div class="footer-bottom-links">
+              <a href="#" data-en="Privacy Policy" data-tc="隱私政策">Privacy Policy</a>
+              <a href="#" data-en="Terms of Use" data-tc="使用條款">Terms of Use</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function(){
+  var lang='en';
+  var currentPage='home';
+
+  var mqEN='<div class="marquee-item">Premium Beverages <span class="marquee-dot"></span> Global Sourcing <span class="marquee-dot"></span> U.S. Market Development <span class="marquee-dot"></span> Logistics &amp; Distribution <span class="marquee-dot"></span> Alcoholic &amp; Non-Alcoholic <span class="marquee-dot"></span> FMCG <span class="marquee-dot"></span> Import &amp; Trade <span class="marquee-dot"></span> Brand Partnerships</div><div class="marquee-item">Premium Beverages <span class="marquee-dot"></span> Global Sourcing <span class="marquee-dot"></span> U.S. Market Development <span class="marquee-dot"></span> Logistics &amp; Distribution <span class="marquee-dot"></span> Alcoholic &amp; Non-Alcoholic <span class="marquee-dot"></span> FMCG <span class="marquee-dot"></span> Import &amp; Trade <span class="marquee-dot"></span> Brand Partnerships</div>';
+  var mqTC='<div class="marquee-item">優質飲品 <span class="marquee-dot"></span> 全球採購 <span class="marquee-dot"></span> 美國市場開發 <span class="marquee-dot"></span> 物流與分銷 <span class="marquee-dot"></span> 酒精與非酒精 <span class="marquee-dot"></span> 快消品 <span class="marquee-dot"></span> 進口與貿易 <span class="marquee-dot"></span> 品牌合作</div><div class="marquee-item">優質飲品 <span class="marquee-dot"></span> 全球採購 <span class="marquee-dot"></span> 美國市場開發 <span class="marquee-dot"></span> 物流與分銷 <span class="marquee-dot"></span> 酒精與非酒精 <span class="marquee-dot"></span> 快消品 <span class="marquee-dot"></span> 進口與貿易 <span class="marquee-dot"></span> 品牌合作</div>';
+
+  window.showPage=function(id){
+    var cur=document.getElementById('page-'+currentPage);
+    if(cur){cur.classList.remove('active');cur.scrollTop=0;}
+    var next=document.getElementById('page-'+id);
+    if(next){next.classList.add('active');}
+    currentPage=id;
+    var links=document.querySelectorAll('.nav-links a');
+    for(var i=0;i<links.length;i++){
+      var p=links[i].getAttribute('data-page');
+      links[i].classList.toggle('active-nav', p===id);
+    }
+  };
+
+  window.setLang=function(l){
+    lang=l;
+    document.body.classList.toggle('lang-tc',l==='tc');
+    document.getElementById('btn-en').classList.toggle('active',l==='en');
+    document.getElementById('btn-tc').classList.toggle('active',l==='tc');
+    document.documentElement.lang=l==='tc'?'zh-TW':'en';
+    var els=document.querySelectorAll('[data-en][data-tc]');
+    for(var i=0;i<els.length;i++){
+      var v=els[i].getAttribute(l==='tc'?'data-tc':'data-en');
+      if(v!==null)els[i].innerHTML=v;
+    }
+    var ph=document.querySelectorAll('[data-ph-en]');
+    for(var j=0;j<ph.length;j++){
+      var p=ph[j].getAttribute(l==='tc'?'data-ph-tc':'data-ph-en');
+      if(p)ph[j].placeholder=p;
+    }
+    document.getElementById('marquee-track').innerHTML=l==='tc'?mqTC:mqEN;
+  };
+
+  window.handleSubmit=function(e){
+    e.preventDefault();
+    var btn=e.target.querySelector('.form-submit');
+    btn.textContent=lang==='tc'?'訊息已發送 ✓':'Message Sent ✓';
+    btn.style.background='#2C6B3F';btn.style.color='#fff';
+    setTimeout(function(){
+      btn.textContent=lang==='tc'?'發送訊息 →':'Send Message →';
+      btn.style.background='';btn.style.color='';
+    },3000);
+  };
+})();
+</script>
+</body>
+</html>
