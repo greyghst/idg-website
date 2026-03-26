@@ -44,10 +44,10 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .nav-logo { display: flex; align-items: baseline; gap: 10px; text-decoration: none; flex-shrink: 0; cursor: pointer; }
 .nav-logo-mark { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--red); letter-spacing: 0.05em; }
 .nav-logo-sep { width: 1px; height: 18px; background: var(--border-light); display: inline-block; vertical-align: middle; }
-.nav-logo-full { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+.nav-logo-full { font-family: var(--sans); font-size: 12px; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
 .nav-right { display: flex; align-items: center; gap: 32px; }
 .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
-.nav-links a { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; position: relative; cursor: pointer; }
+.nav-links a { font-family: var(--sans); font-size: 12px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s; position: relative; cursor: pointer; }
 .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--red); transition: width 0.3s; }
 .nav-links a:hover { color: var(--ink); }
 .nav-links a:hover::after, .nav-links a.active-nav::after { width: 100%; }
@@ -81,15 +81,15 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 #page-home { background: var(--white); }
 .hero-accent-bar { position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--red); }
 .home-content { display: grid; grid-template-columns: 1fr 400px; gap: 80px; align-items: center; width: 100%; }
-.hero-eyebrow { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
+.hero-eyebrow { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; display: flex; align-items: center; gap: 14px; }
 .hero-eyebrow::before { content: ''; display: inline-block; width: 40px; height: 2px; background: var(--red); }
 .hero-headline { font-family: var(--serif); font-size: clamp(52px, 6vw, 84px); font-weight: 300; line-height: 1.05; color: var(--ink); margin-bottom: 32px; }
 .hero-headline em { font-style: italic; color: var(--red); }
 .hero-sub { font-size: 15px; font-weight: 300; color: var(--mid); line-height: 1.8; max-width: 520px; margin-bottom: 48px; }
 .hero-actions { display: flex; gap: 20px; align-items: center; }
-.btn-primary { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); padding: 16px 36px; text-decoration: none; transition: background 0.3s, transform 0.2s; display: inline-block; cursor: pointer; border: none; }
+.btn-primary { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); padding: 16px 36px; text-decoration: none; transition: background 0.3s, transform 0.2s; display: inline-block; cursor: pointer; border: none; }
 .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
-.btn-ghost { font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s; cursor: pointer; background: none; border: none; }
+.btn-ghost { font-family: var(--sans); font-size: 12px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.3s; cursor: pointer; background: none; border: none; }
 .btn-ghost:hover { color: var(--red); }
 .btn-ghost::after { content: '→'; font-size: 14px; transition: transform 0.3s; }
 .btn-ghost:hover::after { transform: translateX(4px); }
@@ -97,7 +97,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .hero-stat { padding: 24px 0; border-bottom: 1px solid var(--border-light); }
 .hero-stat:last-child { border-bottom: none; }
 .hero-stat-number { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--red); line-height: 1; margin-bottom: 6px; }
-.hero-stat-label { font-size: 11px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+.hero-stat-label { font-size: 12px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
 
 /* ── ABOUT ── */
 #page-about { background: var(--white); }
@@ -124,7 +124,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .service-title { font-family: var(--serif); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 14px; line-height: 1.2; }
 .service-body { font-size: 13px; font-weight: 300; color: var(--mid); line-height: 1.8; margin-bottom: 24px; }
 .service-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.service-features li { font-size: 12px; font-weight: 300; color: var(--mid); display: flex; align-items: center; gap: 10px; }
+.service-features li { font-size: 13px; font-weight: 300; color: var(--mid); display: flex; align-items: center; gap: 10px; }
 .service-features li::before { content: ''; width: 20px; height: 2px; background: var(--red); flex-shrink: 0; }
 
 /* ── PORTFOLIO ── */
@@ -133,8 +133,8 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .brand-card:hover { background: var(--off-white); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
 .brand-role-tag { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
 .brand-name { font-family: var(--serif); font-size: 38px; font-weight: 600; color: var(--ink); line-height: 1; margin-bottom: 8px; }
-.brand-sub { font-size: 11px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
-.brand-origin { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: 0.1em; }
+.brand-sub { font-size: 12px; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+.brand-origin { font-size: 12px; font-weight: 300; color: var(--muted); letter-spacing: 0.1em; }
 .brand-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid rgba(155,27,48,0.3); padding: 5px 12px; }
 .brand-side-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
 .brand-side-value { font-size: 13px; color: var(--ink); font-weight: 300; }
@@ -171,7 +171,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--border-light); border-bottom-color: var(--red); background: var(--white); }
 .form-textarea { resize: vertical; min-height: 110px; }
 .form-select option { background: var(--white); }
-.form-submit { font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); border: none; padding: 16px 40px; cursor: pointer; transition: background 0.3s; align-self: flex-start; }
+.form-submit { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: var(--red); border: none; padding: 16px 40px; cursor: pointer; transition: background 0.3s; align-self: flex-start; }
 .form-submit:hover { background: var(--red-dark); }
 
 /* FOOTER */
@@ -179,16 +179,16 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
 .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 .footer-logo { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--red-light); letter-spacing: 0.08em; margin-bottom: 6px; }
-.footer-tagline { font-size: 11px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-.footer-desc { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; }
+.footer-tagline { font-size: 12px; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.footer-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; }
 .footer-col-title { font-size: 10px; font-weight: 500; letter-spacing: 0.35em; text-transform: uppercase; color: var(--red-light); margin-bottom: 16px; }
 .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 .footer-links a { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.3s; cursor: pointer; }
 .footer-links a:hover { color: var(--white); }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
-.footer-copy { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
+.footer-copy { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.35); letter-spacing: 0.1em; }
 .footer-bottom-links { display: flex; gap: 28px; }
-.footer-bottom-links a { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+.footer-bottom-links a { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
 .footer-bottom-links a:hover { color: var(--white); }
 </style>
 </head>
@@ -375,8 +375,8 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
             </div>
           </div>
           <div>
-            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water." data-tc="OMAR是台灣最受讚譽的單一麥芽威士忌，產自位於台灣中部山區的南投酒廠。由台灣菸酒公司精心釀造，OMAR在蓋爾語中意為「琥珀」，以其熱帶果香特色著稱，源自島嶼獨特的亞熱帶氣候與清冽山泉水。">OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water.</p>
-            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage." data-tc="OMAR採用非冷凝過濾，不添加焦糖色素，每一瓶都呈現自然風土。在ISC、SFWSC、IWSC、WWA及CMB等國際賽事屢獲殊榮，包括最高大獎及金牌，OMAR已在世界威士忌舞台確立地位。">Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage.</p>
+            <p style="font-size:16px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water." data-tc="OMAR是台灣最受讚譽的單一麥芽威士忌，產自位於台灣中部山區的南投酒廠。由台灣菸酒公司精心釀造，OMAR在蓋爾語中意為「琥珀」，以其熱帶果香特色著稱，源自島嶼獨特的亞熱帶氣候與清冽山泉水。">OMAR is Taiwan's most celebrated single malt whisky, produced at the Nantou Distillery nestled in the mountains of central Taiwan. Crafted by Taiwan Tobacco &amp; Liquor Corporation, OMAR — meaning 'amber' in Gaelic — is distinguished by its tropical fruity character, born from the island's unique subtropical climate and pristine mountain water.</p>
+            <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage." data-tc="OMAR採用非冷凝過濾，不添加焦糖色素，每一瓶都呈現自然風土。在ISC、SFWSC、IWSC、WWA及CMB等國際賽事屢獲殊榮，包括最高大獎及金牌，OMAR已在世界威士忌舞台確立地位。">Non-chill filtered and free of caramel coloring, OMAR presents natural terroir in every bottle. Award-winning at ISC, SFWSC, IWSC, WWA, and CMB — including Supreme Winner and Grand Gold Medal — OMAR has earned its place on the world whisky stage.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
               <span class="brand-tag" data-en="Sherry &amp; Bourbon Cask" data-tc="雪莉桶與波本桶">Sherry &amp; Bourbon Cask</span>
               <span class="brand-tag" data-en="Liquor Finish" data-tc="原桶強度">Liquor Finish</span>
@@ -409,8 +409,8 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
             </div>
           </div>
           <div>
-            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft." data-tc="好結果（Goodie Fruitie）是一個台灣手工品牌，以一個獨特理念為核心：以最純粹美好的形式，展現台灣非凡的水果文化。由一鳴農園生技農園創立，品牌將台灣新鮮採收的水果，製成無人工添加劑的優質乾果及特色產品——只有水果、用心與工藝。">Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft.</p>
-            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers." data-tc="其中最具特色的是神秘果產品——這種源自西非、在台灣長期栽培的稀有水果，能暫時將酸味轉化為甜味。以精美禮盒呈現，好結果佔據了優質「食物即體驗」的市場定位，深受美國特色零售及注重健康的消費者青睞。">A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers.</p>
+            <p style="font-size:16px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft." data-tc="好結果（Goodie Fruitie）是一個台灣手工品牌，以一個獨特理念為核心：以最純粹美好的形式，展現台灣非凡的水果文化。由一鳴農園生技農園創立，品牌將台灣新鮮採收的水果，製成無人工添加劑的優質乾果及特色產品——只有水果、用心與工藝。">Goodie Fruitie (好結果) is a Taiwanese artisan brand built around a singular idea: celebrating Taiwan's extraordinary fruit heritage in its most pure and beautiful form. Founded by Yi-Ming Agriculture &amp; Biotech Farm, the brand transforms fresh-harvested Taiwanese fruits into premium dried and specialty products with no artificial additives — just fruit, care, and craft.</p>
+            <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers." data-tc="其中最具特色的是神秘果產品——這種源自西非、在台灣長期栽培的稀有水果，能暫時將酸味轉化為甜味。以精美禮盒呈現，好結果佔據了優質「食物即體驗」的市場定位，深受美國特色零售及注重健康的消費者青睞。">A standout in the lineup is the Miracle Berry (神秘果) product — a rare West African fruit long cultivated in Taiwan that temporarily transforms sour flavors into sweet. Beautifully packaged for gifting, Goodie Fruitie occupies a premium food-as-experience niche that resonates deeply with U.S. specialty retail and wellness-conscious consumers.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
               <span class="brand-tag" data-en="Miracle Berry" data-tc="神秘果">Miracle Berry</span>
               <span class="brand-tag" data-en="Premium Dried Fruit" data-tc="優質乾果">Premium Dried Fruit</span>
@@ -441,8 +441,8 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
             </div>
           </div>
           <div>
-            <p style="font-size:15px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief." data-tc="Redbloom是首款專為腸胃健康設計的辣椒脆，臨床配方讓愛辣者盡享濃郁風味而無消化不適。有機辣椒以酪梨油微膠囊化，在傳遞真實辣味的同時保護腸道內壁，使Redbloom成為首款以臨床劑量和辣椒素療法緩解腸易激綜合症的辣椒脆。">Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief.</p>
-            <p style="font-size:13px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan." data-tc="曾獲Men's Health及Eater報導，並獲史丹佛醫學院及芝加哥大學腸胃科醫生背書，Redbloom符合HSA/FSA資格——這是食品中罕見的殊榮。提供三種辣度（鮮味、香氣、多巴胺），無種籽油、低FODMAP、無麩質且純素。">As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan.</p>
+            <p style="font-size:16px;font-weight:300;color:var(--charcoal);line-height:1.8;margin-bottom:20px;" data-en="Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief." data-tc="Redbloom是首款專為腸胃健康設計的辣椒脆，臨床配方讓愛辣者盡享濃郁風味而無消化不適。有機辣椒以酪梨油微膠囊化，在傳遞真實辣味的同時保護腸道內壁，使Redbloom成為首款以臨床劑量和辣椒素療法緩解腸易激綜合症的辣椒脆。">Redbloom is a first-of-its-kind gut-healthy chili crisp, clinically formulated to let spice lovers enjoy bold flavor without digestive discomfort. Organic chilis are microencapsulated in avocado oil — delivering authentic heat while protecting gut lining — making Redbloom the first chili crisp backed by clinical dosages and capsaicin therapy protocols for IBS relief.</p>
+            <p style="font-size:14px;font-weight:300;color:var(--mid);line-height:1.8;" data-en="As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan." data-tc="曾獲Men's Health及Eater報導，並獲史丹佛醫學院及芝加哥大學腸胃科醫生背書，Redbloom符合HSA/FSA資格——這是食品中罕見的殊榮。提供三種辣度（鮮味、香氣、多巴胺），無種籽油、低FODMAP、無麩質且純素。">As seen in Men's Health and Eater, and endorsed by gastroenterologists from Stanford Medicine and UChicago, Redbloom is HSA/FSA eligible — a rare distinction for a food product. Available in three heat levels (Umami, Aroma, Dopamine), it's no-seed-oil, low FODMAP, gluten-free, and vegan.</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;">
               <span class="brand-tag" data-en="HSA / FSA Eligible" data-tc="HSA/FSA適用">HSA / FSA Eligible</span>
               <span class="brand-tag" data-en="Clinically Formulated" data-tc="臨床配方">Clinically Formulated</span>
