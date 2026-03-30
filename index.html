@@ -190,6 +190,93 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 .footer-bottom-links { display: flex; gap: 28px; }
 .footer-bottom-links a { font-size: 11px; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
 .footer-bottom-links a:hover { color: var(--white); }
+
+/* ═══════════════════════════════════════════════════
+   TABLET RESPONSIVE — Samsung Galaxy Tab S9 (800px)
+   ═══════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+
+  /* NAV */
+  nav { padding: 0 24px; gap: 12px; }
+  .nav-logo-full { display: none; }
+  .nav-right { gap: 16px; }
+  .nav-links { gap: 18px; }
+  .nav-links a { font-size: 10px; letter-spacing: 0.12em; }
+  .nav-cta { padding: 8px 14px; font-size: 10px; }
+  .lang-btn { padding: 6px 10px; font-size: 10px; }
+
+  /* SHARED */
+  .section-inner { padding: 48px 32px; }
+
+  /* HOME */
+  .home-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-headline { font-size: clamp(40px, 7vw, 64px); }
+  .hero-sidebar {
+    border-left: none; padding-left: 0;
+    border-top: 2px solid var(--red); padding-top: 32px;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-stat { padding: 20px 16px; border-right: 1px solid var(--border-light); }
+  .hero-stat:nth-child(2n) { border-right: none; }
+  .hero-stat-number { font-size: 32px; }
+
+  /* ABOUT */
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-grid > div:last-child { padding-top: 0; }
+
+  /* SERVICES */
+  .services-header { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+  .services-grid { grid-template-columns: 1fr; gap: 2px; }
+  .service-card { padding: 32px 28px; }
+
+  /* PORTFOLIO */
+  .brand-card {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+    padding: 32px;
+  }
+  .brand-card > div:last-child {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid var(--border-light);
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .brand-card > div:last-child > div { min-width: 120px; }
+  .brand-name { font-size: 28px !important; }
+
+  /* WHY IDG */
+  .why-layout { grid-template-columns: 1fr; gap: 40px; }
+  .why-left { position: static; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .why-item { padding: 24px; }
+  .why-item:nth-child(2n) { border-right: none; }
+
+  /* CONTACT */
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .form-row { grid-template-columns: 1fr; gap: 16px; }
+
+  /* FOOTER */
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-inner { padding: 0 32px; }
+
+  /* PORTFOLIO PAGE HEADER */
+  #page-portfolio .section-inner > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .why-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-sidebar { grid-template-columns: repeat(2, 1fr); }
+  nav { padding: 0 16px; }
+  .nav-links { gap: 12px; }
+}
+
 </style>
 </head>
 <body>
