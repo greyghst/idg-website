@@ -350,7 +350,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
       <div style="display:flex;flex-direction:column;gap:12px;">
 
         <!-- OMAR -->
-<div class="brand-card" id="omar-card" style="cursor:pointer;" onclick="omarShowGate()">
+        <div class="brand-card">
           <div>
             <div class="brand-role-tag" data-en="Exclusive U.S. Distributor" data-tc="美國獨家分銷商">Exclusive U.S. Distributor</div>
             <div class="brand-name">OMAR</div>
@@ -596,6 +596,10 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
       var p=links[i].getAttribute('data-page');
       links[i].classList.toggle('active-nav', p===id);
     }
+    // Auto-trigger OMAR age gate when Portfolio page opens
+    if (id === 'portfolio') {
+      setTimeout(function(){ window.omarShowGate(); }, 200);
+    }
   };
 
   window.setLang=function(l){
@@ -630,55 +634,75 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
 
   // ── OMAR AGE GATE ──
   window.omarShowGate = function() {
-    if (sessionStorage.getItem('omar-age-ok') === '1') {
-      var card = document.getElementById('omar-card');
-      if (card) card.scrollIntoView({behavior:'smooth',block:'center'});
-      return;
-    }
+    if (sessionStorage.getItem('omar-age-ok') === '1') return;
     var el = document.getElementById('omar-age-gate');
     el.style.display = 'flex';
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.5s ease';
+    setTimeout(function(){ el.style.opacity = '1'; }, 10);
     document.body.style.overflow = 'hidden';
   };
+
   window.omarAgeConfirm = function(ok) {
-    document.getElementById('omar-age-gate').style.display = 'none';
-    document.body.style.overflow = '';
+    var gate = document.getElementById('omar-age-gate');
+    gate.style.opacity = '0';
+    setTimeout(function(){
+      gate.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 400);
     if (ok) {
-      sessionStorage.setItem('omar-age-ok','1');
-      var card = document.getElementById('omar-card');
-      if (card) card.scrollIntoView({behavior:'smooth',block:'center'});
+      sessionStorage.setItem('omar-age-ok', '1');
     } else {
-      document.getElementById('omar-underage').style.display = 'flex';
+      setTimeout(function(){
+        document.getElementById('omar-underage').style.display = 'flex';
+      }, 420);
     }
   };
+
   window.omarUnderageClose = function() {
     document.getElementById('omar-underage').style.display = 'none';
     document.body.style.overflow = '';
+    // Navigate back to home
+    showPage('home');
   };
 })();
 </script>
 
-  <!-- OMAR AGE GATE OVERLAY -->
-  <div id="omar-age-gate" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,8,8,0.97);align-items:center;justify-content:center;flex-direction:column;">
-    <div style="text-align:center;max-width:480px;padding:60px 40px;">
+  <!-- OMAR AGE GATE OVERLAY - auto-triggers on Portfolio visit -->
+  <div id="omar-age-gate" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;flex-direction:column;">
+    <!-- Semi-transparent dark backdrop -->
+    <div style="position:absolute;inset:0;background:rgba(8,8,8,0.88);backdrop-filter:blur(4px);"></div>
+    <!-- Gate content card -->
+    <div style="position:relative;z-index:1;text-align:center;max-width:480px;padding:60px 40px;background:rgba(15,15,15,0.95);border:1px solid rgba(155,27,48,0.25);box-shadow:0 24px 80px rgba(0,0,0,0.6);">
       <div style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:#9B1B30;margin-bottom:28px;">Irongate Distribution Group</div>
-      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;font-weight:300;color:#F5F0EB;line-height:1;margin-bottom:8px;">OMAR</div>
-      <div style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,235,0.4);margin-bottom:48px;">Single Malt Whisky &middot; Taiwan</div>
-      <div style="width:40px;height:1px;background:#9B1B30;margin:0 auto 48px;"></div>
-      <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:300;color:rgba(245,240,235,0.85);line-height:1.7;margin-bottom:48px;">This section contains information about alcoholic beverages. Please confirm you are of legal drinking age.</p>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:56px;font-weight:300;color:#F5F0EB;line-height:1;margin-bottom:8px;">OMAR</div>
+      <div style="font-family:'Jost',sans-serif;font-size:11px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:rgba(245,240,235,0.4);margin-bottom:44px;">Single Malt Whisky &middot; Taiwan</div>
+      <div style="width:40px;height:1px;background:#9B1B30;margin:0 auto 44px;"></div>
+      <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:300;color:rgba(245,240,235,0.85);line-height:1.7;margin-bottom:44px;">This section contains information about alcoholic beverages. Please confirm you are of legal drinking age.</p>
       <div style="display:flex;flex-direction:column;gap:14px;align-items:center;">
-        <button onclick="omarAgeConfirm(true)" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:#fff;background:#9B1B30;border:none;padding:18px 0;cursor:pointer;width:100%;max-width:300px;" onmouseover="this.style.background='#7A1424'" onmouseout="this.style.background='#9B1B30'">I am 21 or older</button>
-        <button onclick="omarAgeConfirm(false)" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,240,235,0.45);background:transparent;border:1px solid rgba(245,240,235,0.15);padding:16px 0;cursor:pointer;width:100%;max-width:300px;">I am not 21</button>
+        <button onclick="omarAgeConfirm(true)"
+          style="font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:#fff;background:#9B1B30;border:none;padding:18px 0;cursor:pointer;width:100%;max-width:300px;transition:background 0.3s;"
+          onmouseover="this.style.background='#7A1424'"
+          onmouseout="this.style.background='#9B1B30'">I am 21 or older</button>
+        <button onclick="omarAgeConfirm(false)"
+          style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:rgba(245,240,235,0.45);background:transparent;border:1px solid rgba(245,240,235,0.15);padding:16px 0;cursor:pointer;width:100%;max-width:300px;transition:all 0.3s;"
+          onmouseover="this.style.color='rgba(245,240,235,0.9)'"
+          onmouseout="this.style.color='rgba(245,240,235,0.45)'">I am not 21</button>
       </div>
       <p style="font-family:'Jost',sans-serif;font-size:10px;font-weight:300;color:rgba(245,240,235,0.2);margin-top:44px;line-height:1.8;">By entering you confirm you are of legal drinking age in your country of residence.</p>
     </div>
   </div>
+
   <!-- OMAR UNDERAGE MESSAGE -->
   <div id="omar-underage" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(8,8,8,0.97);align-items:center;justify-content:center;flex-direction:column;">
     <div style="text-align:center;max-width:400px;padding:60px 40px;">
       <div style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:#9B1B30;margin-bottom:32px;">Irongate Distribution Group</div>
       <p style="font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:300;color:rgba(245,240,235,0.85);line-height:1.6;margin-bottom:20px;">We're sorry, this content is not available to you.</p>
       <p style="font-family:'Jost',sans-serif;font-size:13px;font-weight:300;color:rgba(245,240,235,0.4);line-height:1.8;">You must be of legal drinking age to view this section.</p>
-      <button onclick="omarUnderageClose()" style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,235,0.5);background:transparent;border:1px solid rgba(245,240,235,0.15);padding:14px 40px;cursor:pointer;margin-top:44px;">Return to Portfolio</button>
+      <button onclick="omarUnderageClose()"
+        style="font-family:'Jost',sans-serif;font-size:11px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(245,240,235,0.5);background:transparent;border:1px solid rgba(245,240,235,0.15);padding:14px 40px;cursor:pointer;margin-top:44px;transition:all 0.3s;"
+        onmouseover="this.style.color='rgba(245,240,235,0.9)'"
+        onmouseout="this.style.color='rgba(245,240,235,0.5)'">Return to Portfolio</button>
     </div>
   </div>
 </body>
