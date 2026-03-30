@@ -505,24 +505,25 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
         </div>
         <div>
           <form class="contact-form" action="https://formspree.io/f/xpqodbpz" method="POST">
+            <input type="hidden" name="_subject" value="New website inquiry from Irongate Distribution Group">
             <div class="form-row">
-              <div class="form-group"><label class="form-label" data-en="First Name" data-tc="名字">First Name</label><input type="text" class="form-input" data-ph-en="John" data-ph-tc="名" placeholder="John"></div>
-              <div class="form-group"><label class="form-label" data-en="Last Name" data-tc="姓氏">Last Name</label><input type="text" class="form-input" data-ph-en="Smith" data-ph-tc="例：陳" placeholder="Smith"></div>
+              <div class="form-group"><label class="form-label" data-en="First Name" data-tc="名字">First Name</label><input type="text" name="first_name" class="form-input" data-ph-en="John" data-ph-tc="名" placeholder="John" required></div>
+              <div class="form-group"><label class="form-label" data-en="Last Name" data-tc="姓氏">Last Name</label><input type="text" name="last_name" class="form-input" data-ph-en="Smith" data-ph-tc="例：陳" placeholder="Smith" required></div>
             </div>
-            <div class="form-group"><label class="form-label" data-en="Company" data-tc="公司名稱">Company</label><input type="text" class="form-input" data-ph-en="Your company name" data-ph-tc="您的公司名稱" placeholder="Your company name"></div>
-            <div class="form-group"><label class="form-label" data-en="Email" data-tc="電子郵件">Email</label><input type="email" class="form-input" placeholder="john@company.com"></div>
+            <div class="form-group"><label class="form-label" data-en="Company" data-tc="公司名稱">Company</label><input type="text" name="company" class="form-input" data-ph-en="Your company name" data-ph-tc="您的公司名稱" placeholder="Your company name"></div>
+            <div class="form-group"><label class="form-label" data-en="Email" data-tc="電子郵件">Email</label><input type="email" name="email" class="form-input" placeholder="john@company.com" required></div>
             <div class="form-group">
               <label class="form-label" data-en="I Am A..." data-tc="我的身份是...">I Am A...</label>
-              <select class="form-select">
-                <option data-en="Select your role" data-tc="請選擇身份">Select your role</option>
-                <option data-en="International Producer / Brand Owner" data-tc="國際生產商／品牌擁有人">International Producer / Brand Owner</option>
-                <option data-en="U.S. Retailer / Buyer" data-tc="美國零售商／採購商">U.S. Retailer / Buyer</option>
-                <option data-en="Distributor" data-tc="分銷商">Distributor</option>
-                <option data-en="Investor / Business Partner" data-tc="投資者／商業夥伴">Investor / Business Partner</option>
-                <option data-en="Other" data-tc="其他">Other</option>
+              <select name="role" class="form-select" required>
+                <option value="" data-en="Select your role" data-tc="請選擇身份">Select your role</option>
+                <option value="International Producer / Brand Owner" data-en="International Producer / Brand Owner" data-tc="國際生產商／品牌擁有人">International Producer / Brand Owner</option>
+                <option value="U.S. Retailer / Buyer" data-en="U.S. Retailer / Buyer" data-tc="美國零售商／採購商">U.S. Retailer / Buyer</option>
+                <option value="Distributor" data-en="Distributor" data-tc="分銷商">Distributor</option>
+                <option value="Investor / Business Partner" data-en="Investor / Business Partner" data-tc="投資者／商業夥伴">Investor / Business Partner</option>
+                <option value="Other" data-en="Other" data-tc="其他">Other</option>
               </select>
             </div>
-            <div class="form-group"><label class="form-label" data-en="Message" data-tc="留言">Message</label><textarea class="form-textarea" data-ph-en="Tell us about your brand, goals, or inquiry..." data-ph-tc="請告訴我們您的品牌、目標或查詢內容……" placeholder="Tell us about your brand, goals, or inquiry..."></textarea></div>
+            <div class="form-group"><label class="form-label" data-en="Message" data-tc="留言">Message</label><textarea name="message" class="form-textarea" data-ph-en="Tell us about your brand, goals, or inquiry..." data-ph-tc="請告訴我們您的品牌、目標或查詢內容……" placeholder="Tell us about your brand, goals, or inquiry..." required></textarea></div>
             <button type="submit" class="form-submit" data-en="Send Message →" data-tc="發送訊息 →">Send Message →</button>
           </form>
         </div>
