@@ -500,11 +500,11 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
           <div class="contact-details">
             <div class="contact-detail"><span class="contact-detail-label" data-en="Location" data-tc="地點">Location</span><span class="contact-detail-value" data-en="United States" data-tc="美國">United States</span></div>
             <div class="contact-detail"><span class="contact-detail-label" data-en="Focus" data-tc="專注領域">Focus</span><span class="contact-detail-value" data-en="Premium Beverages &amp; FMCG Import" data-tc="優質飲品與快消品進口">Premium Beverages &amp; FMCG Import</span></div>
-            <div class="contact-detail"><span class="contact-detail-label" data-en="Inquiries" data-tc="查詢">Inquiries</span><span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6bfb8b0b996bfa4b9b8b1b7a2b3bfb2b1f8b5b9bb">[email&#160;protected]</a></span></div>
+            <div class="contact-detail"><span class="contact-detail-label" data-en="Inquiries" data-tc="查詢">Inquiries</span><span class="contact-detail-value"><a href="mailto:info@irongatedist.com">info@irongatedist.com</a></span></div>
           </div>
         </div>
         <div>
-          <form class="contact-form" onsubmit="handleSubmit(event)">
+          <form class="contact-form" action="https://formspree.io/f/xpqodbpz" method="POST">
             <div class="form-row">
               <div class="form-group"><label class="form-label" data-en="First Name" data-tc="名字">First Name</label><input type="text" class="form-input" data-ph-en="John" data-ph-tc="名" placeholder="John"></div>
               <div class="form-group"><label class="form-label" data-en="Last Name" data-tc="姓氏">Last Name</label><input type="text" class="form-input" data-ph-en="Smith" data-ph-tc="例：陳" placeholder="Smith"></div>
@@ -621,16 +621,6 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
     document.getElementById('marquee-track').innerHTML=l==='tc'?mqTC:mqEN;
   };
 
-  window.handleSubmit=function(e){
-    e.preventDefault();
-    var btn=e.target.querySelector('.form-submit');
-    btn.textContent=lang==='tc'?'訊息已發送 ✓':'Message Sent ✓';
-    btn.style.background='#2C6B3F';btn.style.color='#fff';
-    setTimeout(function(){
-      btn.textContent=lang==='tc'?'發送訊息 →':'Send Message →';
-      btn.style.background='';btn.style.color='';
-    },3000);
-  };
 
   // ── OMAR AGE GATE ──
   window.omarShowGate = function() {
